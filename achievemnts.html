@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Achievements | Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Video Background -->
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="videos/Background.mp4" type="video/mp4">
+  </video>
+
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="index.html">About Me</a></li>
+      <li><a href="education.html">Education</a></li>
+      <li><a href="achievements.html" class="active">Achievements</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="section">
+      <div class="content">
+        <h2>Achievements</h2>
+        <ul class="achievement-list">
+          <li onclick="openModal(this.querySelector('img'))">
+            <img src="images/Mother.jpg" alt="Hugging my mother" class="achievement-img">
+            🤗 Hugging my Mother
+          </li>
+          <li onclick="openModal(this.querySelector('img'))">
+            <img src="images/Father.jpg" alt="Shaking hands with my father" class="achievement-img">
+            🤝 Shaking Hands with my Father
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal for full-size image -->
+  <div id="imageModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <script>
+    // Open modal with clicked image
+    function openModal(img) {
+      var modal = document.getElementById("imageModal");
+      var modalImg = document.getElementById("modalImage");
+      modal.style.display = "block";
+      modalImg.src = img.src;
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById("imageModal").style.display = "none";
+    }
+
+    // Close modal if clicking outside the image
+    var modal = document.getElementById("imageModal");
+    modal.addEventListener('click', function(e){
+      if(e.target == modal){
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>
