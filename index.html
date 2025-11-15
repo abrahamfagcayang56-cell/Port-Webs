@@ -4,70 +4,219 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portfolio | Abraham S. Fagcayang</title>
-  <link rel="stylesheet" href="style.css" />
 
+  <!-- ===================== CSS ===================== -->
   <style>
-    /* Hide all pages by default */
-    .page {
-      display: none;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
 
-    /* Show only the active page */
-    .active-page {
-      display: block;
-    }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  overflow-x: hidden;
+}
 
-    nav a.active {
-      color: yellow; /* highlight active page */
-      font-weight: bold;
-    }
+/* Video Background */
+#bg-video {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+  filter: brightness(0.5) saturate(1.2);
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: -1;
+}
+
+/* Navigation */
+nav {
+  position: fixed;
+  top: 0; width: 100%;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
+  z-index: 10;
+}
+nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 15px;
+  list-style: none;
+}
+nav a {
+  color: #d9e4f5;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+nav a:hover { color: #ffffff; transform: translateY(-2px); }
+nav a.active { color: #f3a712; font-weight: 700; }
+
+/* Page System */
+.page { display: none; }
+.active-page { display: block; }
+
+main { padding-top: 100px; }
+.section {
+  padding: 40px 20px;
+  max-width: 950px;
+  margin: auto;
+  text-align: center;
+  animation: fadeInUp 0.8s ease;
+}
+
+/* About */
+.photo-frame {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #5bc0be;
+  box-shadow: 0 0 20px rgba(91,192,190,0.5);
+}
+.profile-pic {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.highlight { color: #5bc0be; }
+.biography {
+  max-width: 700px;
+  margin: auto;
+  line-height: 1.6;
+}
+
+/* Education */
+.edu-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 12px;
+  margin: 15px auto;
+  max-width: 800px;
+  padding: 15px;
+  transition: 0.3s ease;
+}
+.edu-card:hover { transform: translateY(-5px); }
+.edu-photo-frame {
+  width: 120px; height: 120px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #5bc0be;
+}
+.edu-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.edu-info { text-align: left; }
+
+/* Achievements */
+.achievement-list {
+  list-style: none;
+  padding: 0;
+}
+.achievement-list li {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: rgba(255,255,255,0.08);
+  padding: 15px;
+  width: 80%;
+  margin: 10px auto;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.achievement-list li:hover {
+  background: rgba(91,192,190,0.25);
+  transform: translateY(-5px);
+}
+.achievement-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 20;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.85);
+}
+.modal-content {
+  display: block;
+  margin: 5% auto;
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(91,192,190,0.7);
+}
+.close {
+  position: absolute;
+  top: 20px; right: 40px;
+  color: #fff;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .edu-card { flex-direction: column; text-align: center; }
+  .achievement-list li { flex-direction: column; }
+}
   </style>
+
 </head>
 <body>
 
-  <!-- Video Background -->
+  <!-- ===================== VIDEO BACKGROUND ===================== -->
   <video autoplay muted loop playsinline id="bg-video">
     <source src="videos/Background.mp4" type="video/mp4">
   </video>
 
-  <!-- Navigation -->
+  <!-- ===================== NAVIGATION ===================== -->
   <nav>
     <ul>
-      <li><a onclick="showPage('about')" id="nav-about">About Me</a></li>
-      <li><a onclick="showPage('education')" id="nav-education">Education</a></li>
-      <li><a onclick="showPage('achievements')" id="nav-achievements">Achievements</a></li>
+      <li><a id="nav-about" onclick="showPage('about')">About Me</a></li>
+      <li><a id="nav-education" onclick="showPage('education')">Education</a></li>
+      <li><a id="nav-achievements" onclick="showPage('achievements')">Achievements</a></li>
     </ul>
   </nav>
 
+  <main>
 
-
-
-  
-
-  <!-- PAGE 1: ABOUT ME -->
-  <section id="about" class="page active-page">
-    <div class="content">
+    <!-- ========== PAGE 1: ABOUT ========== -->
+    <section id="about" class="page active-page section">
       <div class="photo-frame">
-        <img src="images/Formal.jpg" alt="Profile picture" class="profile-pic" />
+        <img src="images/Formal.jpg" class="profile-pic">
       </div>
-
       <h1>Hi, I'm <span class="highlight">Abraham S. Fagcayang</span></h1>
-
-      <h2 class="section-title">About Me:</h2>
       <p class="biography">
-        I’m an aspiring IT professional with a major in Enterprise Resource Planning. Ever since I was young, I’ve been fascinated by how technology connects people and simplifies life. That curiosity grew into a passion for solving problems through innovation and system efficiency. Today, I strive to combine my technical skills and creativity to build solutions that make a real difference.
+        I’m an aspiring IT professional with a major in Enterprise Resource Planning...
       </p>
-    </div>
-  </section>
+    </section>
 
-
-
-
-  
-
-  <!-- PAGE 2: EDUCATION -->
-  <section id="education" class="page">
-    <div class="content">
+    <!-- ========== PAGE 2: EDUCATION ========== -->
+    <section id="education" class="page section">
       <h2>Educational Background</h2>
 
       <div class="edu-card">
@@ -82,59 +231,11 @@
         </div>
       </div>
 
-      <div class="edu-card">
-        <div class="edu-photo-frame">
-          <img src="images/SHS G11-G12.jpg" class="edu-photo">
-        </div>
-        <div class="edu-info">
-          <h3>Senior High School</h3>
-          <p><strong>School:</strong> All Saints Mission School</p>
-          <p><strong>Strand:</strong> HUMSS</p>
-          <p><strong>Year:</strong> 2023 – 2025</p>
-        </div>
-      </div>
+      <!-- other edu cards here... -->
+    </section>
 
-      <div class="edu-card">
-        <div class="edu-photo-frame">
-          <img src="images/HS G9-G10.jpg" class="edu-photo">
-        </div>
-        <div class="edu-info">
-          <h3>Junior High School</h3>
-          <p><strong>School:</strong> MPGCHS</p>
-          <p><strong>Level:</strong> Grade 9–10</p>
-          <p><strong>Year:</strong> 2021 – 2023</p>
-        </div>
-      </div>
-
-      <div class="edu-card">
-        <div class="edu-photo-frame">
-          <img src="images/HS G7-G8.jpg" class="edu-photo">
-        </div>
-        <div class="edu-info">
-          <h3>Junior High School</h3>
-          <p><strong>School:</strong> BCNHS</p>
-          <p><strong>Level:</strong> Grade 7–8</p>
-          <p><strong>Year:</strong> 2019 – 2021</p>
-        </div>
-      </div>
-
-      <div class="edu-card">
-        <div class="edu-photo-frame">
-          <img src="images/Elem.jpg" class="edu-photo">
-        </div>
-        <div class="edu-info">
-          <h3>Elementary</h3>
-          <p><strong>School:</strong> Tocucan Elementary School</p>
-          <p><strong>Level:</strong> Kinder – Grade 6</p>
-          <p><strong>Year:</strong> 2013 – 2019</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PAGE 3: ACHIEVEMENTS -->
-  <section id="achievements" class="page">
-    <div class="content">
+    <!-- ========== PAGE 3: ACHIEVEMENTS ========== -->
+    <section id="achievements" class="page section">
       <h2>Achievements</h2>
       <ul class="achievement-list">
         <li onclick="openModal(this.querySelector('img'))">
@@ -147,30 +248,28 @@
           🤝 Shaking Hands with my Father
         </li>
       </ul>
-    </div>
-  </section>
+    </section>
 
-  <!-- Modal -->
+  </main>
+
+  <!-- ===================== MODAL ===================== -->
   <div id="imageModal" class="modal">
     <span class="close" onclick="closeModal()">&times;</span>
-    <img class="modal-content" id="modalImage">
+    <img id="modalImage" class="modal-content">
   </div>
 
-  <!-- Page Switching Script -->
+  <!-- ===================== JAVASCRIPT ===================== -->
   <script>
+    // Page switching
     function showPage(pageId) {
-      // Hide all pages
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
+      document.querySelectorAll(".page").forEach(p => p.classList.remove("active-page"));
+      document.getElementById(pageId).classList.add("active-page");
 
-      // Show selected page
-      document.getElementById(pageId).classList.add('active-page');
-
-      // Update nav highlight
-      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-      document.getElementById('nav-' + pageId).classList.add('active');
+      document.querySelectorAll("nav a").forEach(n => n.classList.remove("active"));
+      document.getElementById("nav-" + pageId).classList.add("active");
     }
 
-    // Modal Show/Hide
+    // Modal
     function openModal(img) {
       document.getElementById("imageModal").style.display = "block";
       document.getElementById("modalImage").src = img.src;
@@ -179,6 +278,6 @@
       document.getElementById("imageModal").style.display = "none";
     }
   </script>
+
 </body>
 </html>
-
