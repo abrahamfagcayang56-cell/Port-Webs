@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>About Me | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio | Abraham S. Fagcayang</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
   <!-- Video Background -->
   <video autoplay muted loop playsinline id="bg-video">
     <source src="videos/Background.mp4" type="video/mp4">
@@ -15,29 +16,145 @@
   <!-- Navigation -->
   <nav>
     <ul>
-      <li><a href="index.html" data-link>About Me</a></li>
-      <li><a href="education.html" data-link>Education</a></li>
-      <li><a href="achievements.html" data-link>Achievements</a></li>
+      <li><a href="#about-me" data-link>About Me</a></li>
+      <li><a href="#education" data-link>Education</a></li>
+      <li><a href="#achievements" data-link>Achievements</a></li>
     </ul>
   </nav>
 
-  <main>
-    <section class="section">
-      <div class="content">
-        <div class="photo-frame">
-          <img src="images/Formal.jpg" alt="Profile picture" class="profile-pic" />
-        </div>
+  <!-- About Me Section -->
+  <section id="about-me" class="section">
+    <div class="content">
+      <div class="photo-frame">
+        <img src="images/Formal.jpg" alt="Profile picture" class="profile-pic" />
+      </div>
 
-        <h1>Hi, I'm <span class="highlight">Abraham S. Fagcayang</span></h1>
+      <h1>Hi, I'm <span class="highlight">Abraham S. Fagcayang</span></h1>
 
-        <h2 class="section-title">About Me:</h2>
-        <!-- Biography/Introduction -->
+      <h2 class="section-title">About Me:</h2>
       <p class="biography">
-        I’m an aspiring IT professional with a major in Enterprise Resource Planning. Ever since I was young, I’ve been fascinated by how technology connects people and simplifies life. That curiosity  grew into a passion for solving problems through innovation and system efficiency. Today, I strive to combine my technical skills and creativity to build solutions that make a real difference.
+        I’m an aspiring IT professional with a major in Enterprise Resource Planning. Ever since I was young, I’ve been fascinated by how technology connects people and simplifies life. That curiosity grew into a passion for solving problems through innovation and system efficiency. Today, I strive to combine my technical skills and creativity to build solutions that make a real difference.
       </p>
     </div>
   </section>
-</main>
+
+  <!-- Education Section -->
+  <section id="education" class="section">
+    <div class="content">
+      <h2>Educational Background</h2>
+
+      <!-- College -->
+      <div class="edu-card">
+        <div class="edu-photo-frame">
+          <img src="images/UC logo.png" alt="College Photo" class="edu-photo">
+        </div>
+        <div class="edu-info">
+          <h3>College</h3>
+          <p><strong>University:</strong> University of the Cordilleras</p>
+          <p><strong>Course:</strong> Bachelor of Science in Information Technology – Enterprise Resource Planning</p>
+          <p><strong>Year:</strong> 2025 – Present</p>
+        </div>
+      </div>
+
+      <!-- Senior High -->
+      <div class="edu-card">
+        <div class="edu-photo-frame">
+          <img src="images/SHS G11-G12.jpg" alt="Senior High Photo" class="edu-photo">
+        </div>
+        <div class="edu-info">
+          <h3>Senior High School</h3>
+          <p><strong>School:</strong> All Saints Mission School of Mt. Province Inc.</p>
+          <p><strong>Strand:</strong> Humanities and Social Sciences</p>
+          <p><strong>Year:</strong> 2023 – 2025</p>
+        </div>
+      </div>
+
+      <!-- Junior High 1 -->
+      <div class="edu-card">
+        <div class="edu-photo-frame">
+          <img src="images/HS G9-G10.jpg" alt="Junior High Photo" class="edu-photo">
+        </div>
+        <div class="edu-info">
+          <h3>Junior High School</h3>
+          <p><strong>School:</strong> Mountain Province General Comprehensive High School</p>
+          <p><strong>Grade level:</strong> Grade 9 - Grade 10</p>
+          <p><strong>Year:</strong> 2021 – 2023</p>
+        </div>
+      </div>
+
+      <!-- Junior High 2 -->
+      <div class="edu-card">
+        <div class="edu-photo-frame">
+          <img src="images/HS G7-G8.jpg" alt="Junior High Photo" class="edu-photo">
+        </div>
+        <div class="edu-info">
+          <h3>Junior High School</h3>
+          <p><strong>School:</strong> Baguio City National High School</p>
+          <p><strong>Grade level:</strong> Grade 7 - Grade 8</p>
+          <p><strong>Year:</strong> 2019 – 2021</p>
+        </div>
+      </div>
+
+      <!-- Elementary -->
+      <div class="edu-card">
+        <div class="edu-photo-frame">
+          <img src="images/Elem.jpg" alt="Elementary Photo" class="edu-photo">
+        </div>
+        <div class="edu-info">
+          <h3>Elementary School</h3>
+          <p><strong>School:</strong> Tocucan Elementary School</p>
+          <p><strong>Grade level:</strong> Kindergarten - Grade 6</p>
+          <p><strong>Year:</strong> 2013 – 2019</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievements Section -->
+  <section id="achievements" class="section">
+    <div class="content">
+      <h2>Achievements</h2>
+      <ul class="achievement-list">
+        <li onclick="openModal(this.querySelector('img'))">
+          <img src="images/Mother.jpg" alt="Hugging my mother" class="achievement-img">
+          🤗 Hugging my Mother
+        </li>
+        <li onclick="openModal(this.querySelector('img'))">
+          <img src="images/Father.jpg" alt="Shaking hands with my father" class="achievement-img">
+          🤝 Shaking Hands with my Father
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Modal for full-size image -->
+  <div id="imageModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <script>
+    // Open modal with clicked image
+    function openModal(img) {
+      var modal = document.getElementById("imageModal");
+      var modalImg = document.getElementById("modalImage");
+      modal.style.display = "block";
+      modalImg.src = img.src;
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById("imageModal").style.display = "none";
+    }
+
+    // Close modal if clicking outside the image
+    var modal = document.getElementById("imageModal");
+    modal.addEventListener('click', function(e){
+      if(e.target == modal){
+        closeModal();
+      }
+    });
+  </script>
 
   <script src="script.js"></script>
 </body>
