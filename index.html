@@ -5,6 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portfolio | Abraham S. Fagcayang</title>
   <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* Hide all pages by default */
+    .page {
+      display: none;
+    }
+
+    /* Show only the active page */
+    .active-page {
+      display: block;
+    }
+
+    nav a.active {
+      color: yellow; /* highlight active page */
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
 
@@ -16,14 +33,14 @@
   <!-- Navigation -->
   <nav>
     <ul>
-      <li><a href="#about-me" data-link>About Me</a></li>
-      <li><a href="#education" data-link>Education</a></li>
-      <li><a href="#achievements" data-link>Achievements</a></li>
+      <li><a onclick="showPage('about')" id="nav-about">About Me</a></li>
+      <li><a onclick="showPage('education')" id="nav-education">Education</a></li>
+      <li><a onclick="showPage('achievements')" id="nav-achievements">Achievements</a></li>
     </ul>
   </nav>
 
-  <!-- About Me Section -->
-  <section id="about-me" class="section">
+  <!-- PAGE 1: ABOUT ME -->
+  <section id="about" class="page active-page">
     <div class="content">
       <div class="photo-frame">
         <img src="images/Formal.jpg" alt="Profile picture" class="profile-pic" />
@@ -38,124 +55,119 @@
     </div>
   </section>
 
-  <!-- Education Section -->
-  <section id="education" class="section">
+  <!-- PAGE 2: EDUCATION -->
+  <section id="education" class="page">
     <div class="content">
       <h2>Educational Background</h2>
 
-      <!-- College -->
       <div class="edu-card">
         <div class="edu-photo-frame">
-          <img src="images/UC logo.png" alt="College Photo" class="edu-photo">
+          <img src="images/UC logo.png" class="edu-photo">
         </div>
         <div class="edu-info">
           <h3>College</h3>
           <p><strong>University:</strong> University of the Cordilleras</p>
-          <p><strong>Course:</strong> Bachelor of Science in Information Technology – Enterprise Resource Planning</p>
+          <p><strong>Course:</strong> BSIT – ERP</p>
           <p><strong>Year:</strong> 2025 – Present</p>
         </div>
       </div>
 
-      <!-- Senior High -->
       <div class="edu-card">
         <div class="edu-photo-frame">
-          <img src="images/SHS G11-G12.jpg" alt="Senior High Photo" class="edu-photo">
+          <img src="images/SHS G11-G12.jpg" class="edu-photo">
         </div>
         <div class="edu-info">
           <h3>Senior High School</h3>
-          <p><strong>School:</strong> All Saints Mission School of Mt. Province Inc.</p>
-          <p><strong>Strand:</strong> Humanities and Social Sciences</p>
+          <p><strong>School:</strong> All Saints Mission School</p>
+          <p><strong>Strand:</strong> HUMSS</p>
           <p><strong>Year:</strong> 2023 – 2025</p>
         </div>
       </div>
 
-      <!-- Junior High 1 -->
       <div class="edu-card">
         <div class="edu-photo-frame">
-          <img src="images/HS G9-G10.jpg" alt="Junior High Photo" class="edu-photo">
+          <img src="images/HS G9-G10.jpg" class="edu-photo">
         </div>
         <div class="edu-info">
           <h3>Junior High School</h3>
-          <p><strong>School:</strong> Mountain Province General Comprehensive High School</p>
-          <p><strong>Grade level:</strong> Grade 9 - Grade 10</p>
+          <p><strong>School:</strong> MPGCHS</p>
+          <p><strong>Level:</strong> Grade 9–10</p>
           <p><strong>Year:</strong> 2021 – 2023</p>
         </div>
       </div>
 
-      <!-- Junior High 2 -->
       <div class="edu-card">
         <div class="edu-photo-frame">
-          <img src="images/HS G7-G8.jpg" alt="Junior High Photo" class="edu-photo">
+          <img src="images/HS G7-G8.jpg" class="edu-photo">
         </div>
         <div class="edu-info">
           <h3>Junior High School</h3>
-          <p><strong>School:</strong> Baguio City National High School</p>
-          <p><strong>Grade level:</strong> Grade 7 - Grade 8</p>
+          <p><strong>School:</strong> BCNHS</p>
+          <p><strong>Level:</strong> Grade 7–8</p>
           <p><strong>Year:</strong> 2019 – 2021</p>
         </div>
       </div>
 
-      <!-- Elementary -->
       <div class="edu-card">
         <div class="edu-photo-frame">
-          <img src="images/Elem.jpg" alt="Elementary Photo" class="edu-photo">
+          <img src="images/Elem.jpg" class="edu-photo">
         </div>
         <div class="edu-info">
-          <h3>Elementary School</h3>
+          <h3>Elementary</h3>
           <p><strong>School:</strong> Tocucan Elementary School</p>
-          <p><strong>Grade level:</strong> Kindergarten - Grade 6</p>
+          <p><strong>Level:</strong> Kinder – Grade 6</p>
           <p><strong>Year:</strong> 2013 – 2019</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Achievements Section -->
-  <section id="achievements" class="section">
+  <!-- PAGE 3: ACHIEVEMENTS -->
+  <section id="achievements" class="page">
     <div class="content">
       <h2>Achievements</h2>
       <ul class="achievement-list">
         <li onclick="openModal(this.querySelector('img'))">
-          <img src="images/Mother.jpg" alt="Hugging my mother" class="achievement-img">
+          <img src="images/Mother.jpg" class="achievement-img">
           🤗 Hugging my Mother
         </li>
+
         <li onclick="openModal(this.querySelector('img'))">
-          <img src="images/Father.jpg" alt="Shaking hands with my father" class="achievement-img">
+          <img src="images/Father.jpg" class="achievement-img">
           🤝 Shaking Hands with my Father
         </li>
       </ul>
     </div>
   </section>
 
-  <!-- Modal for full-size image -->
+  <!-- Modal -->
   <div id="imageModal" class="modal">
     <span class="close" onclick="closeModal()">&times;</span>
     <img class="modal-content" id="modalImage">
   </div>
 
+  <!-- Page Switching Script -->
   <script>
-    // Open modal with clicked image
-    function openModal(img) {
-      var modal = document.getElementById("imageModal");
-      var modalImg = document.getElementById("modalImage");
-      modal.style.display = "block";
-      modalImg.src = img.src;
+    function showPage(pageId) {
+      // Hide all pages
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
+
+      // Show selected page
+      document.getElementById(pageId).classList.add('active-page');
+
+      // Update nav highlight
+      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      document.getElementById('nav-' + pageId).classList.add('active');
     }
 
-    // Close modal
+    // Modal Show/Hide
+    function openModal(img) {
+      document.getElementById("imageModal").style.display = "block";
+      document.getElementById("modalImage").src = img.src;
+    }
     function closeModal() {
       document.getElementById("imageModal").style.display = "none";
     }
-
-    // Close modal if clicking outside the image
-    var modal = document.getElementById("imageModal");
-    modal.addEventListener('click', function(e){
-      if(e.target == modal){
-        closeModal();
-      }
-    });
   </script>
-
-  <script src="script.js"></script>
 </body>
 </html>
